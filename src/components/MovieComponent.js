@@ -29,7 +29,9 @@ justify-content: space-between;
 `;
 const MovieInfo = styled.span`
 font-size: 16px;
-
+font-weight: 500;
+color: black;
+text-transform: capitalize;
 `
 
 
@@ -39,8 +41,8 @@ const MovieComponent = (props) => {
         />
         <MovieName>Guardians of the Galaxy Vol. 2"</MovieName>
         <InfoColumn>
-            <span>2012</span>
-            <span>Movie</span>
+          <MovieInfo>Year: 2012</MovieInfo>
+          <MovieInfo>Type: Movie</MovieInfo>
         </InfoColumn>
         
         </MovieContainer>;
