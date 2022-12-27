@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React, {useState}  from 'react'
 import MovieComponent from "./components/MovieComponent"
 const Container = styled.div`
 display: grid;
@@ -60,7 +61,14 @@ justify-content: space-evenly;
 `
 
 function App() {
+  const [searchQuery, updateSearchQuery] = useState();
+  const [timeoutId, updateTimeoutId] = useState();
   
+  const onTextChange = (event) => {
+  updateSearchQuery(event.target.value);
+  const timeout = setTimeout(() => console.log("API call"), 500);
+  updateTimeoutId(timeout);
+  };
   return (
     <Container>
       <Header>
@@ -70,7 +78,10 @@ function App() {
         </AppName>
         <SearchBox>
           <SearchIcon src='/search-icon.svg' />
-          <SearchInput placeholder="Search Movie" />
+          <SearchInput placeholder="Search Movie" 
+          value={searchQuery }
+          onChange={onTextChange}
+          />
         </SearchBox>
         </Header>
         <MovieListContainer>
