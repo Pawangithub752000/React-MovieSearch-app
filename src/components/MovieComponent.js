@@ -36,17 +36,18 @@ text-transform: capitalize;
 
 
 const MovieComponent = (props) => {
-    return <MovieContainer>
-        <CoverImage src='https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg'
-        />
-        <MovieName>Guardians of the Galaxy Vol. 2"</MovieName>
+    const { Title, Year, imdbID, Type, Poster } = props.movie;
+    return (
+    <MovieContainer onClick={()=>props.onMovieSelect(imdbID)}>
+        <CoverImage src={Poster} />
+        <MovieName>{Title}</MovieName>
         <InfoColumn>
-          <MovieInfo>Year: 2012</MovieInfo>
-          <MovieInfo>Type: Movie</MovieInfo>
+          <MovieInfo>Year: {Year}</MovieInfo>
+          <MovieInfo>Type: {Type}</MovieInfo>
         </InfoColumn>
         
-        </MovieContainer>;
-        
+        </MovieContainer>
+    );       
 
 };
 export default MovieComponent;

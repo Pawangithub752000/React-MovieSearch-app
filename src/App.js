@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {useState}  from 'react';
 import axios from 'axios'; 
+import MovieInfoComponent from "./components/MovieInfoComponent"
 import MovieComponent from "./components/MovieComponent";
 
 export const API_KEY = "c6bed92a";
@@ -61,6 +62,7 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 padding: 30px;
+gap: 24px;
 justify-content: space-evenly;
 `
 
@@ -68,6 +70,7 @@ function App() {
   const [searchQuery, updateSearchQuery] = useState();
   const [timeoutId, updateTimeoutId] = useState();
   const [movieList, updateMovieList] = useState([]);
+  const [selectedMovie, onMovieSelect] = useState();
 
    const fetchData = async (searchString) => {
    const response = await axios.get(`https://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY}`);
@@ -84,6 +87,7 @@ function App() {
   return (
     <Container>
       <Header>
+        {selectedMovie && <MovieInfoComponent selectedMovie={selectedMovie}/> }
         <AppName>
           <MovieImage src="/movie-icon.svg" />
           React Movie App
@@ -98,7 +102,11 @@ function App() {
         </Header>
         <MovieListContainer>
           {movieList?.length? movieList.map((movie, index)=>(
-          <MovieComponent key={index} movie={movie} />
+          <MovieComponent 
+          key={index} 
+          movie={movie} 
+          onMovieSelect={onMovieSelect}
+          />
           ))
           :"No Movie Search"}
         
