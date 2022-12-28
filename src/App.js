@@ -1,7 +1,11 @@
-import styled from 'styled-components'
-import React, {useState}  from 'react'
-import MovieComponent from "./components/MovieComponent"
+import styled from 'styled-components';
+import React, {useState}  from 'react';
+import axios from 'axios'; 
+import MovieComponent from "./components/MovieComponent";
+
+export const API_KEY = "c6bed92a";
 const Container = styled.div`
+
 display: grid;
 fiex-direction: row;
 `;
@@ -63,10 +67,18 @@ justify-content: space-evenly;
 function App() {
   const [searchQuery, updateSearchQuery] = useState();
   const [timeoutId, updateTimeoutId] = useState();
-  
+  const [movieList, updateMovieList] = useState([]);
+
+   const fetchData = async (searchString) => {
+   const response = await axios.get(`https://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY}`);
+    // console.log(response)
+    updateMovieList(response.data.Search)
+  };
   const onTextChange = (event) => {
+  clearTimeout(timeoutId);
   updateSearchQuery(event.target.value);
-  const timeout = setTimeout(() => console.log("API call"), 500);
+  // const timeout = setTimeout(() => console.log("API call"), 500);
+  const timeout = setTimeout(() => fetchData(event.target.value), 500);
   updateTimeoutId(timeout);
   };
   return (
@@ -85,10 +97,11 @@ function App() {
         </SearchBox>
         </Header>
         <MovieListContainer>
-        <MovieComponent />
-        <MovieComponent />
-        <MovieComponent />
-        <MovieComponent />
+          {movieList?.length? movieList.map((movie, index)=>(
+          <MovieComponent key={index} movie={movie} />
+          ))
+          :"No Movie Search"}
+        
         </MovieListContainer>
     </Container>
   );
