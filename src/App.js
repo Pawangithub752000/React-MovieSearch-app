@@ -36,10 +36,10 @@ const SearchBox = styled.div`
   width: 50%;
   background-color: white;
 `;
-const SearchIcon = styled.img`
-  width: 32px;
-  height: 32px;
-`;
+// const SearchIcon = styled.img`
+//   width: 32px;
+//   height: 32px;
+// `;
 const MovieImage = styled.img`
   width: 48px;
   height: 48px;
@@ -94,11 +94,11 @@ function App() {
     <Container>
       <Header>
         <AppName>
-          <MovieImage src="/movie-icon.svg" />
-          React Movie App
+          <MovieImage src="https://mpng.subpng.com/20180704/vbv/kisspng-art-film-cinema-fx-movie-channel-television-movie-poster-5b3c6f2e4a4653.2243007915306872783042.jpg" />
+         React Movie App
         </AppName>
         <SearchBox>
-          <SearchIcon src="/search-icon.svg" />
+          {/* <SearchIcon src="https://www.iconsdb.com/icons/preview/gray/search-9-xxl.png" /> */}
           <SearchInput
             placeholder="Search Movie"
             value={searchQuery}
@@ -117,7 +117,8 @@ function App() {
             />
           ))
         ) : (
-          <Placeholder src="/movie-icon.svg" />
+          // <Placeholder src="/movie-icon.svg" />
+          <Placeholder src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-25.jpg" />
         )}
       </MovieListContainer>
     </Container>
